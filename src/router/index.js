@@ -1,26 +1,19 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import home from '../views/HomeView.vue'
 
-const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
-  routes: [
+const routes = [
     {
-      path: '/',
-      name: 'home',
-      component: home,
+        path: '/',
+        name: 'movies',
+        component: () => import('../views/MovieList.vue')
     },
     {
-      path: '/movies',
-      name: 'movies',
-      component: () => import('../views/MovieList.vue'),
-    },
-    {
-      path: '/movie',
-      name: 'movie',
-      component: () => import('../components/Movie.vue'),
+        path: '/movie/:id',
+        name: 'movie',
+        component: () => import('../views/MoviePage.vue')
     }
+]
 
-  ],
+export default createRouter({
+    history: createWebHistory(),
+    routes
 })
-
-export default router

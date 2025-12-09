@@ -1,16 +1,15 @@
 <script setup>
-function onListClick(){
-  window.alert("Hello world!");}
+//function onListClick(){window.alert("Hello world!");}
+//<button @click="onListClick">alert</button>
+
 </script>
 
 <template>
-  <nav>
-    <RouterLink to="/">Go to Home</RouterLink>
-    <RouterLink to="/movies">Go to movies</RouterLink>
+  <nav class="text-center mt-3">
+    <RouterLink to="/" class="text-decoration-none fw-bold">Home</RouterLink>
   </nav>
-  <main>
+  <main class="mt-5 container text-center">
     <RouterView />
-    <button @click="onListClick">alert</button>
   </main>
 </template>
 

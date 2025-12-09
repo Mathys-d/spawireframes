@@ -9,11 +9,10 @@ export default {
 
 
 <template>
-<div>
-  <h1>{{movie.title}} {{movie.year}}</h1>
-  <p>{{movie.plot}}</p>
-  <p>{{movie.genres[1].label}}</p>
-  <router-link to="movie">More</router-link>
+<div class="overflow-auto ">
+  <router-link :to="{ name: 'movie', params: { id: movie.id } }">
+    <img :src="movie?.poster || '/clap.jpg'" alt="poster" height="450px" width="303" class="float-center m-1" />
+  </router-link>
 </div>
 </template>
 
