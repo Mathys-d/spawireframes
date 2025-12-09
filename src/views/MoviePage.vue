@@ -17,17 +17,21 @@ export default {
 </script>
 
 <template>
-  <div class="d-flex flex-wrap justify-content-start gap-3 w-25">
-    <img v-if="movie" :src="movie.poster" alt="poster" height="650px"/>
-  </div>
-  <div class="d-flex  justify-content-start gap-3 w-25">
-    <h1 v-if="movie">{{ movie.title }}</h1>
-  </div>
-  <div>
-    <p v-if="movie">{{ movie.fullPlot }}</p>
-    <p v-if="movie">{{ movie.genres[1].label }}</p>
-    <p v-if="movie">{{ movie.imdb.rating }}</p>
+  <div class="mt-50 pl-50 pr-50">
+    <div v-if="movie" class="d-flex align-items-start gap-3 mb-4 bg-secondary">
+      <img :src="movie.poster || '/clap.jpg'" alt="poster" class="img-fluid" style="width: 250px; height: auto;" />
 
-    <p v-else>Chargement...</p>
+      <div class="d-flex flex-column">
+        <h1 class="mb-5 text-start">{{ movie.title }} - {{ movie.year }}</h1>
+
+        <p class="text-break mb-4">{{ movie.fullPlot }}</p>
+
+        <div class="d-flex gap-3">
+          <p class="mb-0"><strong>Genre:</strong> {{ movie.genres[1]?.label }}</p>
+          <p class="mb-0"><strong>Rating:</strong> {{ movie.imdb.rating || 'N/A' }}</p>
+        </div>
+      </div>
+    </div>
   </div>
+
 </template>

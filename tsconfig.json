@@ -1,8 +1,26 @@
 {
   "compilerOptions": {
+    "target": "ESNext",                   // ESNext pour compatibilité avec Vite
+    "module": "ESNext",                   // Module ES pour Vite
+    "moduleResolution": "node",           // Résolution des modules
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "skipLibCheck": true,
+    "allowJs": true,                       // Autorise les fichiers JS
+    "jsx": "preserve",                     // Pour JSX si besoin
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./*"]
+      "@/*": ["./src/*"]                   // Ajuste le chemin @ à ton dossier src
     }
-  }
+  },
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.d.ts",
+    "src/**/*.vue",
+    "src/**/*.js"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }
