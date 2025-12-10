@@ -9,7 +9,6 @@ export default {
   },
   mounted() {
     const id = this.$route.params.id;
-
     api.get(`/movies/${id}`)
         .then(res => this.movie = res.data);
   }

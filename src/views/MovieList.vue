@@ -1,6 +1,11 @@
 <script>
 import Movie from '../components/Movie.vue'
 import {api} from '../apiMovies.js'
+import {ChevronRight} from 'lucide-vue-next';
+import {ChevronDown} from 'lucide-vue-next';
+import {Checkbox} from '@/components/ui/checkbox'
+import {RangeCalendar} from "@/components/ui/range-calendar/index.ts";
+
 import {
   Pagination,
   PaginationContent,
@@ -8,13 +13,17 @@ import {
   PaginationPrevious,
   PaginationNext,
   PaginationEllipsis,
-    PaginationLast,
-    PaginationFirst,
+  PaginationLast,
+  PaginationFirst,
 } from "@/registry/new-york-v4/ui/pagination/index.ts";
 
 export default {
   name: "MoviesList",
   components: {
+    RangeCalendar,
+    Checkbox,
+    ChevronDown,
+    ChevronRight,
     Movie,
     Pagination,
     PaginationContent,
@@ -30,7 +39,10 @@ export default {
     return {
       info: null,
       currentPage: 1,
-      itemsPerPage: 30
+      itemsPerPage: 30,
+      openGenres: false,
+      openYear: false,
+
     }
   },
 
@@ -68,13 +80,41 @@ export default {
 
 <template>
   <div class="justify-content-center mx-auto d-flex flex-column justify-content-center align-items-center ">
-    <div class="text-start mb-5 movieList-gap-top border-bottom border-dark movieList-gap-x-abcsis w-full">
+    <div class="text-start mb-5 movieList-gap-top border-bottom border-dark movieList-gap-x-abcsis w-full ">
       <h3>{{ totalItems }} Résultats</h3>
     </div>
-    <div class="d-flex">
+    <div class="d-flex ">
       <div>
         <div class="filter-content ">
-          <span>Préférences</span>
+          <div class="border-bottom border-dark p-1 m-1">
+            <span>Préférences</span>
+          </div>
+          <div class="border-bottom border-dark p-1 m-1">
+            <button @click="openGenres = !openGenres" class="d-flex justify-content-center align-items-center gap-2">
+              GENRES
+              <chevron-right v-if="!openGenres"/>
+              <chevron-down v-if="openGenres"/>
+            </button>
+            <div v-if="openGenres" class="content">
+              <Checkbox id="terms" class="mx-2"/>
+              <label
+                  for="terms"
+                  class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+              >Action
+              </label>
+            </div>
+          </div>
+          <div class="border-bottom border-dark p-1 m-1">
+            <button @click="openYear = !openYear" class="d-flex justify-content-center align-items-center gap-2">
+              ANNÉES
+              <chevron-right v-if="!openYear"/>
+              <chevron-down v-if="openYear"/>
+            </button>
+            <div v-if="openYear" class="content">
+              <RangeCalendar v-model="value" class="rounded-md border"/>
+
+            </div>
+          </div>
         </div>
       </div>
       <div class="parent-grid gap-3 movieList-gap-x-abcsis w-full ">
@@ -110,7 +150,7 @@ export default {
         </template>
 
         <PaginationNext/>
-        <PaginationLast />
+        <PaginationLast/>
       </PaginationContent>
     </Pagination>
   </div>
@@ -132,16 +172,16 @@ export default {
   grid-template-columns: repeat(5, 1fr);
   grid-column-gap: 0px;
 }
-.filter-content{
+
+.filter-content {
   justify-content: initial;
   box-shadow: initial;
   margin: 0px 20px;
-  padding: 0px;
   position: sticky;
   top: 0px;
   left: 0px;
   width: 150px;
-  padding-top: 75px;
+  padding: 75px 0px 0px;
 }
 
 </style>

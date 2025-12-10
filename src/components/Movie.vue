@@ -12,7 +12,7 @@ export default {
   <div class="color-bg-movie div-style">
     <router-link :to="{ name: 'movie', params: { id: movie.id } }">
       <span class="">{{ movie.genres[1]?.label || '&nbsp;' }}</span>
-    <img :src="movie?.poster || '/clap.jpg'" alt="&nbsp;" class="mt-2 rounded-2 w-img img-fluid" />
+    <img :src="movie?.poster || '/clap.jpg'" alt="&nbsp;" class="mt-2 img-fluid " />
     <div class="">
       <span class="w-full movie-title">{{ movie?.title || '&nbsp;' }}</span>
       <br>
