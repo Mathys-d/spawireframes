@@ -38,6 +38,10 @@ a,
 .container {
     max-width: unset !important;
 }
+.color-bg-movie{
+    background: rgb(22, 27, 38);
+    box-shadow: rgba(26, 26, 26, 0.1) 3px 3px 20px;
+}
 
 
 
