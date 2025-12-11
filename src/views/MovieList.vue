@@ -5,6 +5,7 @@ import {ChevronRight} from 'lucide-vue-next';
 import {ChevronDown} from 'lucide-vue-next';
 import {Checkbox} from '@/components/ui/checkbox'
 import {RangeCalendar} from "@/components/ui/range-calendar/index.ts";
+import etoile_full from '@/assets/etoile_full.png'
 
 import {
   Pagination,
@@ -16,6 +17,7 @@ import {
   PaginationLast,
   PaginationFirst,
 } from "@/registry/new-york-v4/ui/pagination/index.ts";
+
 
 export default {
   name: "MoviesList",
@@ -42,12 +44,19 @@ export default {
       itemsPerPage: 30,
       openGenres: false,
       openYear: false,
-
+      etoile_full: etoile_full,
+      genres: null,
+      selectedGenre: null,
     }
   },
 
   mounted() {
-    this.fetchMovies()
+    if (this.selectedGenre === null) {
+      this.fetchMovies();
+    }else {
+      this.fetchMoviesByGenre();
+    }
+    this.fetchGenre();
   },
 
   methods: {
@@ -58,21 +67,40 @@ export default {
           })
           .catch(error => console.error(error))
     },
+    fetchGenre() {
+      api.get(`/genres`)
+          .then(response => {
+            this.genres = response.data
+          })
+          .catch(error => console.error(error))
+    },
+    fetchMoviesByGenre(id) {
+      api.get(`/genres/${id}/movies`)
+          .then(response => {
+            this.info = response.data
+          })
+          .catch(error => console.error(error))
+    },
+
 
     handlePageChange(page) {
       this.currentPage = page
       this.fetchMovies()
-    }
+    },
   },
 
   computed: {
     paginatedMovies() {
-      // Si ton API renvoie déjà la pagination côté serveur, retourne juste info.member
       return this.info?.member || []
     },
 
     totalItems() {
       return this.info?.totalItems || 0
+    },
+    filteredMovies() {
+      if (this.selectedGenre) {
+        this.fetchMoviesByGenre();
+      }
     }
   }
 }
@@ -96,23 +124,17 @@ export default {
               <chevron-down v-if="openGenres"/>
             </button>
             <div v-if="openGenres" class="content">
-              <Checkbox id="terms" class="mx-2"/>
-              <label
-                  for="terms"
-                  class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-              >Action
-              </label>
-            </div>
-          </div>
-          <div class="border-bottom border-dark p-1 m-1">
-            <button @click="openYear = !openYear" class="d-flex justify-content-center align-items-center gap-2">
-              ANNÉES
-              <chevron-right v-if="!openYear"/>
-              <chevron-down v-if="openYear"/>
-            </button>
-            <div v-if="openYear" class="content">
-              <RangeCalendar v-model="value" class="rounded-md border"/>
-
+              <div v-for="gen in genres.member" :key="gen.id" class="flex items-center mx-2">
+                <label class="flex items-center text-sm font-medium gap-1">
+                  <input
+                      type="radio"
+                      name="genre"
+                      :value="gen.id"
+                      v-model="selectedGenre" @click="fetchMoviesByGenre(gen.id)"
+                  >
+                  {{ gen.label }}
+                </label>
+              </div>
             </div>
           </div>
         </div>
@@ -127,7 +149,7 @@ export default {
     </div>
   </div>
 
-  <div class="text-center mt-4">
+  <div class="text-center  my-5 pb-5">
     <Pagination
         v-slot="{ page }"
         :items-per-page="itemsPerPage"
