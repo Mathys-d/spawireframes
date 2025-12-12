@@ -5,26 +5,27 @@ export default {
 </script>
 
 <template>
-  <div class="fixed-top nav-param rounded-bottom d-flex justify-content-center w-100 mx-auto">
-    <nav class="text-center mt-3">
-      <RouterLink to="/" class="text-decoration-none fw-bold pe-2">FILMS</RouterLink>
-      <!--
-      <span class="px-1 text-white">|</span>
-      <RouterLink to="/series" class="text-decoration-none fw-bold pe-2">SÉRIES</RouterLink>
-      <span class="px-1 text-white">|</span>
-      <RouterLink to="/games" class="text-decoration-none fw-bold pe-2">JEUX VIDÉO</RouterLink>
-      <span class="px-1 text-white">|</span>
-      <RouterLink to="/books" class="text-decoration-none fw-bold pe-2">LIVRES</RouterLink>
-      <span class="px-1 text-white">|</span>
-      <RouterLink to="/bd" class="text-decoration-none fw-bold pe-2">BD</RouterLink>
-      <span class="px-1 text-white">|</span>
-      <RouterLink to="/music" class="text-decoration-none fw-bold pe-2">MUSIQUES</RouterLink>
-      <span class="px-1 text-white">|</span>
-      <RouterLink to="/more" class="text-decoration-none fw-bold pe-2">LES PLUS</RouterLink>
-      -->
+  <div class="fixed-top nav-param rounded-bottom w-100 mx-auto">
+    <nav class="d-flex justify-content-between align-items-center w-100 px-3 mt-3">
+
+      <div class="d-flex justify-content-start flex-grow-1">
+        <RouterLink to="/" class="text-decoration-none fw-bold pe-2">FILMS</RouterLink>
+        <!-- <span class="px-1 text-white">|</span> <RouterLink to="/series" class="text-decoration-none fw-bold pe-2">SÉRIES</RouterLink>
+        <span class="px-1 text-white">|</span> <RouterLink to="/games" class="text-decoration-none fw-bold pe-2">JEUX VIDÉO</RouterLink>
+        <span class="px-1 text-white">|</span> <RouterLink to="/books" class="text-decoration-none fw-bold pe-2">LIVRES</RouterLink>
+         <span class="px-1 text-white">|</span> <RouterLink to="/bd" class="text-decoration-none fw-bold pe-2">BD</RouterLink>
+         <span class="px-1 text-white">|</span> <RouterLink to="/music" class="text-decoration-none fw-bold pe-2">MUSIQUES</RouterLink>
+         <span class="px-1 text-white">|</span> <RouterLink to="/more" class="text-decoration-none fw-bold pe-2">LES PLUS</RouterLink> -->
+      </div>
+
+      <div>
+        <RouterLink to="/login" class="text-decoration-none fw-bold pe-2">CONNEXION</RouterLink>
+      </div>
+
     </nav>
   </div>
 </template>
+
 
 <style scoped>
 .nav-param {
